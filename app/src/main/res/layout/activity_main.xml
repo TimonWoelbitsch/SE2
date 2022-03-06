@@ -30,10 +30,12 @@
 
     <TextView
         android:id="@+id/tv1"
-        android:layout_width="194dp"
-        android:layout_height="48dp"
+        android:layout_width="303dp"
+        android:layout_height="67dp"
         android:layout_marginTop="180dp"
         android:text="Gib deine Matrikelnummer ein"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,8 +44,20 @@
         android:id="@+id/server_response"
         android:layout_width="194dp"
         android:layout_height="27dp"
-        android:layout_marginTop="380dp"
-        android:text=" "
+        android:layout_marginTop="424dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="372dp"
+        android:text="Antwort vom Server"
+        android:textAlignment="center"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
