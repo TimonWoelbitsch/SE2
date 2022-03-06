@@ -32,22 +32,14 @@ public class MainActivity extends AppCompatActivity {
 
         if(server(message)){
             String result = clickbait(message);
-            System.out.println(result);
             response.setText(result);
         }else{
-
             response.setText("Dies ist keine gueltige Matrikelnummer");
         }
-
-
-
-
     }
 
 
     public boolean server(String matno) throws IOException {
-
-
 
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -68,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
             if(modifiedSentence=="Dies ist keine gueltige Matrikelnummer"){
                 return false;
             }
-
-            System.out.println("FROM SERVER: " + modifiedSentence);
-
             clientSocket.close();
 
             return true;
@@ -79,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             return false;
         }
-
-
-
-
     }
 
     public String clickbait(String matno){
@@ -94,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             if(number!= 1 && number!= 2 && number!= 3 && number!= 5 && number!= 7){
                 click[i] = number;
                 numbers++;
-                System.out.println(number);
             }
             else{
                 click[i] = 9;
@@ -106,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
         int[] result=new int[numbers];
         for(int j = 0; j<numbers; j++){
             result[j] = click [j];
-
         }
-
         return Arrays.toString(result);
     }
 
