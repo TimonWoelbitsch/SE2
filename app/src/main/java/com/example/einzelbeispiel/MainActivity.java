@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -30,18 +31,23 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         TextView response = (TextView)findViewById(R.id.server_response);
 
+            String servermessage = server(message);
+            response.setText(servermessage);
 
-        if(server(message)){
-            System.out.println("True");
-            String result = clickbait(message);
-            response.setText(result);
-        }else{
-            response.setText("Dies ist keine gültige Matrikelnummer");
-        }
+
+            if(servermessage.equalsIgnoreCase("Dies ist keine gueltige Matrikelnummer")){
+
+            }
+            else{
+                Button calculate = findViewById(R.id.berechnen);
+                calculate.setVisibility(View.VISIBLE);
+            }
+
+
     }
 
 
-    public boolean server(String matno) throws IOException {
+    public String server(String matno) throws IOException {
 
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -60,18 +66,17 @@ public class MainActivity extends AppCompatActivity {
 
             modifiedSentence = inFromServer.readLine();
             System.out.println(modifiedSentence);
-            if(modifiedSentence.equalsIgnoreCase("Dies ist keine gueltige Matrikelnummer")){
-
-                return false;
-            }
             clientSocket.close();
+            return modifiedSentence;
 
-            return true;
         }
         catch (Exception e){
             e.printStackTrace();
-            return false;
+
         }
+
+
+        return null;
     }
 
     public String clickbait(String matno){
