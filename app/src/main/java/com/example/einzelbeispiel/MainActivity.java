@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         if(server(message)){
+            System.out.println("True");
             String result = clickbait(message);
             response.setText(result);
         }else{
-            response.setText("Dies ist keine gueltige Matrikelnummer");
+            response.setText("Dies ist keine gültige Matrikelnummer");
         }
     }
 
@@ -57,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
             outToServer.writeBytes(sentence + "\n");
 
             modifiedSentence = inFromServer.readLine();
-            if(modifiedSentence=="Dies ist keine gueltige Matrikelnummer"){
+            System.out.println(modifiedSentence);
+            if(modifiedSentence.equalsIgnoreCase("Dies ist keine gueltige Matrikelnummer")){
+
                 return false;
             }
             clientSocket.close();
@@ -91,7 +95,10 @@ public class MainActivity extends AppCompatActivity {
         for(int j = 0; j<numbers; j++){
             result[j] = click [j];
         }
-        return Arrays.toString(result);
+
+        String joinedNumbers = Arrays.toString(result).replace("[","").replace("]","").replace(",", " ");
+
+        return joinedNumbers;
     }
 
 
