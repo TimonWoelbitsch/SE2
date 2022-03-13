@@ -2,6 +2,7 @@ package com.example.einzelbeispiel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -38,9 +39,21 @@ public class MainActivity extends AppCompatActivity {
             if(servermessage.equalsIgnoreCase("Dies ist keine gueltige Matrikelnummer")){
 
             }
-            else{
+            else {
                 Button calculate = findViewById(R.id.berechnen);
                 calculate.setVisibility(View.VISIBLE);
+                calculate.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        Intent myIntent = new Intent(MainActivity.this, Calculate.class);
+                        myIntent.putExtra("key", message);
+                        MainActivity.this.startActivity(myIntent);
+                    }
+
+
+
+                });
             }
 
 
@@ -50,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     public String server(String matno) throws IOException {
 
         try {
+            Button calculate = findViewById(R.id.berechnen);
+            calculate.setVisibility(View.INVISIBLE);
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
 
@@ -79,32 +94,6 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public String clickbait(String matno){
-
-        int [] click = new int[matno.length()];
-        int numbers =0;
-        for(int i = 0; i < click.length; i++){
-            int number = Integer.parseInt(String.valueOf(matno.charAt(i)));
-            if(number!= 1 && number!= 2 && number!= 3 && number!= 5 && number!= 7){
-                click[i] = number;
-                numbers++;
-            }
-            else{
-                click[i] = 9;
-            }
-
-        }
-        Arrays.sort(click);
-
-        int[] result=new int[numbers];
-        for(int j = 0; j<numbers; j++){
-            result[j] = click [j];
-        }
-
-        String joinedNumbers = Arrays.toString(result).replace("[","").replace("]","").replace(",", " ");
-
-        return joinedNumbers;
-    }
 
 
 }
