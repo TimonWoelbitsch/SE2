@@ -26,28 +26,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
-
+        //onClick starts sendmassage in send_1
     public void sendmassage(View view) throws IOException {
+        //EditTextview - enter Matno
         EditText editText = (EditText) findViewById(R.id.number_matrik);
+        //take text from EditTextview from user
         String message = editText.getText().toString();
+        //take server response
         TextView response = (TextView)findViewById(R.id.server_response);
 
+            //get response from method server
             String servermessage = server(message);
-            response.setText(servermessage);
+            //TextView response - server (Matno, converted)
+            response.setText(servermessage); //modifiedSentence
 
+            //now check content of servermessage
 
+            //compare String from server with "Dies ist keine ...".
             if(servermessage.equalsIgnoreCase("Dies ist keine gueltige Matrikelnummer")){
 
             }
             else {
                 Button calculate = findViewById(R.id.berechnen);
                 calculate.setVisibility(View.VISIBLE);
+
                 calculate.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         Intent myIntent = new Intent(MainActivity.this, Calculate.class);
-                        myIntent.putExtra("key", message);
+                        //Send Matno to new activity for accsess
+                        myIntent.putExtra("key", message); //Stored String
                         MainActivity.this.startActivity(myIntent);
                     }
 
@@ -70,17 +79,24 @@ public class MainActivity extends AppCompatActivity {
 
             String sentence;
             String modifiedSentence;
+
+            //Create welcome (clientSocket) at port 53212
             Socket clientSocket = new Socket("se2-isys.aau.at", 53212);
+
+            //Create output stream, attached to socket
             DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 
+            //Create input stream, attached to socket
             BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             sentence = matno;
 
+            //Write out line to socket
             outToServer.writeBytes(sentence + "\n");
 
+            //Read line from server
             modifiedSentence = inFromServer.readLine();
-            System.out.println(modifiedSentence);
+            System.out.println("FROM SERVER: " + modifiedSentence);
             clientSocket.close();
             return modifiedSentence;
 

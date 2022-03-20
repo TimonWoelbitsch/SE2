@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Einzelbeispiel">
+        android:theme="@style/Theme.Einzelbeispiel"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".Calculate"
             android:exported="false" />
@@ -23,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

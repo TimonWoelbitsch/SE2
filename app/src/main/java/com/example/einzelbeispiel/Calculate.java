@@ -15,11 +15,11 @@ public class Calculate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate);
         Intent intent = getIntent();
-        String value = intent.getStringExtra("key"); //if it's a string you stored.
+        String value = intent.getStringExtra("key"); //Stored String
         TextView response = (TextView)findViewById(R.id.resultview);
 
+        //value = Matno
         response.setText(clickbait(value));
-
 
     }
 
@@ -45,8 +45,19 @@ public class Calculate extends AppCompatActivity {
             result[j] = click [j];
         }
 
-        String joinedNumbers = Arrays.toString(result).replace("[","").replace("]","").replace(",", " ");
+        int[] resultreverse = new int[result.length];
+        int i = 0;
+        for(int k = resultreverse.length-1; k > 0; k--){
+            resultreverse[i] = result [k];
+            i++;
+        }
 
-        return joinedNumbers;
+
+
+        String joinedNumbers = Arrays.toString(result).replace("[","").replace("]","").replace(",", " ");
+        String reverseNumbers = Arrays.toString(resultreverse).replace("[","").replace("]","").replace(",", " ");
+        System.out.println(reverseNumbers);
+
+        return reverseNumbers;
     }
 }
